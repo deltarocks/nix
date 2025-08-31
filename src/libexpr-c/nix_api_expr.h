@@ -228,6 +228,8 @@ nix_err nix_eval_state_builder_load(nix_c_context * context, nix_eval_state_buil
  */
 nix_err nix_eval_state_builder_set_lookup_path(
     nix_c_context * context, nix_eval_state_builder * builder, const char ** lookupPath);
+nix_err nix_eval_state_builder_set_eval_setting(
+    nix_c_context * context, nix_eval_state_builder * builder, const char* name, const char* value);
 
 /**
  * @brief Create a new Nix language evaluator state
