@@ -153,6 +153,16 @@ void nix_eval_state_builder_free(nix_eval_state_builder * builder)
     operator delete(builder, static_cast<std::align_val_t>(alignof(nix_eval_state_builder)));
 }
 
+nix_err nix_eval_state_builder_set_eval_setting(nix_c_context * context, nix_eval_state_builder * builder, const char* name, const char* value)
+{
+    if (context)
+        context->last_err_code = NIX_OK;
+    try {
+        builder->settings.set(name, value);
+    }
+    NIXC_CATCH_ERRS
+}
+
 nix_err nix_eval_state_builder_load(nix_c_context * context, nix_eval_state_builder * builder)
 {
     if (context)
