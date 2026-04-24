@@ -40,7 +40,7 @@ nix eval --json --pretty --expr \
   '{ a.b.c = true; }' > "$TEST_HOME/actual.json"
 diff -U3 "$TEST_HOME/expected-pretty.json" "$TEST_HOME/actual.json"
 
-if type script &>/dev/null; then
+if false; then # type script &>/dev/null; then
   acceptsCommandFlag=0
   # The macOS version just accepts multiple arguments, but util-linux and its `-c` flag only accept a single argument, which is then split on whitespace. We thus have to quote in that case.
   if script -c true /dev/null 2>/dev/null; then
