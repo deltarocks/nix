@@ -52,6 +52,7 @@ mkMesonLibrary (finalAttrs: {
   inherit version;
 
   workDir = ./.;
+  mesonBuildDir = "_build";
   fileset = fileset.unions [
     ../../nix-meson-build-support
     ./nix-meson-build-support
