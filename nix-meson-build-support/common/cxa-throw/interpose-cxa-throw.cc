@@ -11,7 +11,12 @@ extern "C" void __cxa_throw(void * exc, std::type_info * tinfo, void (*dest)(voi
     if (is_logic_error(tinfo))
         abort_on_exception(exc, tinfo);
 
-    static auto * orig = (cxa_throw_type) dlsym(RTLD_NEXT, "__cxa_throw");
+    static auto * orig = [] {
+        auto * f = (cxa_throw_type) dlsym(RTLD_NEXT, "__cxa_throw");
+        if (!f)
+            f = (cxa_throw_type) dlsym(RTLD_DEFAULT, "__cxa_throw");
+        return f == &__cxa_throw ? nullptr : f;
+    }();
     if (!orig)
         abort();
 
